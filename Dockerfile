@@ -13,8 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend/ ./backend/
 COPY data/index/ ./data/index/
+COPY entrypoint.sh ./entrypoint.sh
 
-ENV PORT=8000
-ENV PYTHONPATH=/app/backend
+RUN chmod +x /app/entrypoint.sh
 
-EXPOSE 8080
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+
+ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]
