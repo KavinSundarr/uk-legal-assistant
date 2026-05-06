@@ -82,12 +82,31 @@ app.add_middleware(
         "http://127.0.0.1:5500",
         "http://localhost:8080",
         "http://127.0.0.1:8080",
+        "https://uk-legal-assistant.vercel.app",
+        "https://uk-legal-assistant-i1gbnjzig-kavinsundarrs-projects.vercel.app",
         "null",
     ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=600,
 )
+
+
+# Catch-all OPTIONS handler — safety net for any origin the middleware misses
+@app.options("/{rest_of_path:path}")
+async def preflight_handler(request: Request, rest_of_path: str) -> JSONResponse:
+    return JSONResponse(
+        content={},
+        headers={
+            "Access-Control-Allow-Origin":  request.headers.get("origin", "*"),
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Max-Age":       "600",
+        },
+    )
 
 # ---------------------------------------------------------------------------
 # Request logging middleware

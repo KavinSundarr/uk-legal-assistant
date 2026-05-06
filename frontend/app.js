@@ -5,9 +5,22 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── API base URL ───────────────────────────────────────────────────────── */
-const API_BASE = window.location.hostname === 'localhost'
-  ? 'http://127.0.0.1:8000'
-  : 'https://uk-legal-assistant.onrender.com';
+const getApiBase = () => {
+  const hostname = window.location.hostname;
+
+  // Local development (both localhost and 127.0.0.1)
+  if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    return 'http://127.0.0.1:8000';
+  }
+
+  // Deployed on Vercel or anywhere else → Render backend
+  return 'https://uk-legal-assistant.onrender.com';
+};
+
+const API_BASE = getApiBase();
+
+// Debug: visible in browser DevTools → Console tab
+console.log('API_BASE:', API_BASE);
 
 /* ── Application state ──────────────────────────────────────────────────── */
 const state = {
@@ -65,6 +78,7 @@ function init() {
   loadFromSession();
   setupEventListeners();
   dom.queryInput.focus();
+  wakeBackend();
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -241,53 +255,63 @@ async function sendMessage() {
 /**
  * POST /law/query to the backend.
  * Includes category and conversation_id when available.
- * Times out after 30 seconds.
+ * Times out after 60 seconds (allows for Render cold-start wake-up).
  */
 async function callAPI(query) {
+  console.log('Calling API:', API_BASE + '/law/query');
+  console.log('Query:', query);
+  console.log('Category:', state.selectedCategory);
+
   const body = {
     query,
     limit: 5,
-    ...(state.selectedCategory && { category:        state.selectedCategory }),
-    ...(state.conversationId   && { conversation_id: state.conversationId }),
+    category:        state.selectedCategory || null,
+    conversation_id: state.conversationId   || null,
   };
 
-  const controller = new AbortController();
-  const timeoutId  = setTimeout(() => controller.abort(), 30_000);
-
-  let res;
+  let response;
   try {
-    res = await fetch(`${API_BASE}/law/query`, {
+    response = await fetch(API_BASE + '/law/query', {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(body),
-      signal:  controller.signal,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept':        'application/json',
+      },
+      body:   JSON.stringify(body),
+      signal: AbortSignal.timeout(60_000),
     });
   } catch (err) {
-    if (err.name === 'AbortError') {
-      throw new Error('Request timed out after 30 seconds.');
+    console.error('Fetch failed:', err.message);
+    console.error('Full error:', err);
+    if (err.name === 'TimeoutError' || err.name === 'AbortError') {
+      throw new Error('Request timed out. The server may be starting up — please try again in a moment.');
     }
     throw new Error('Network error. Please check your connection and that the API server is running.');
-  } finally {
-    clearTimeout(timeoutId);
   }
 
-  if (!res.ok) {
-    let detail = `Server error (${res.status})`;
+  console.log('Response status:', response.status);
+  console.log('Response headers:', Object.fromEntries(response.headers));
+
+  if (!response.ok) {
+    const errorText = await response.text().catch(() => '');
+    console.error('API error response:', errorText);
+    let detail = `Server error (${response.status})`;
     try {
-      const errBody = await res.json();
+      const errBody = JSON.parse(errorText);
       detail = errBody.detail || errBody.error?.message || detail;
     } catch (_) {}
     throw new Error(detail);
   }
 
-  const payload = await res.json();
+  const data = await response.json();
+  console.log('API response data:', data);
 
   // Persist conversation_id for multi-turn dialogue
-  if (payload.metadata?.conversation_id) {
-    state.conversationId = payload.metadata.conversation_id;
+  if (data.metadata?.conversation_id) {
+    state.conversationId = data.metadata.conversation_id;
   }
 
-  return payload;
+  return data;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -701,6 +725,53 @@ function scrollToBottom() {
 function hideWelcomeState() {
   if (dom.welcomeState && dom.welcomeState.style.display !== 'none') {
     dom.welcomeState.style.display = 'none';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BACKEND KEEPALIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/**
+ * Ping /health on page load to wake the Render backend if it has spun down.
+ * Render free tier sleeps after ~15 min inactivity; cold start = 30-60s.
+ * Shows a pulsing status dot in the welcome screen so users know the server
+ * is waking up rather than thinking the app is broken.
+ */
+async function wakeBackend() {
+  // Only run on production (Render can sleep; local dev doesn't need it)
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return;
+  }
+
+  // Inject a status indicator into the welcome state (created once)
+  let statusEl = document.getElementById('backendStatus');
+  if (!statusEl && dom.welcomeState) {
+    statusEl = document.createElement('div');
+    statusEl.id = 'backendStatus';
+    statusEl.className = 'backend-status';
+    statusEl.innerHTML = `
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">Connecting to server…</span>
+    `;
+    dom.welcomeState.appendChild(statusEl);
+  }
+
+  const statusText = document.getElementById('statusText');
+  const statusDot  = document.getElementById('statusDot');
+
+  try {
+    console.log('Waking backend…');
+    const r = await fetch(API_BASE + '/health', {
+      method: 'GET',
+      signal: AbortSignal.timeout(60_000),
+    });
+    console.log('Backend awake:', r.status);
+    if (statusDot)  statusDot.classList.add('online');
+    if (statusText) statusText.textContent = 'Server ready';
+  } catch (e) {
+    console.log('Backend wake failed:', e.message);
+    if (statusText) statusText.textContent = 'Server unavailable — try again shortly';
   }
 }
 
