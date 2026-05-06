@@ -1,4 +1,35 @@
 ---
+## API CONNECTION DEBUG — 2026-05-06
+### Agent: Senior Developer — API Debug
+
+### Root Causes Found
+1. **[CORS-01]** Vercel origin not in `allow_origins` — CORS preflight returned 502 / `Access-Control-Allow-Origin: MISSING` for any request from the deployed Vercel frontend | Fixed
+2. **[CORS-02]** `"https://*.vercel.app"` is not a valid wildcard in Starlette's `CORSMiddleware` — only exact-string and `allow_origin_regex` patterns work | Fixed via `allow_origin_regex=r"https://.*\.vercel\.app"`
+3. **[JS-01]** `API_BASE` only checked `hostname === 'localhost'` — `python -m http.server` opens at `127.0.0.1:3000` so hostname is `'127.0.0.1'`, which fell through to the Render URL | Fixed via `getApiBase()` checking both
+4. **[JS-02]** 30-second `callAPI` timeout fires before Render cold-start completes (30–60s) | Fixed — timeout extended to 60s, `wakeBackend()` added on page load
+5. **[UX-01]** No feedback to user that Render is cold-starting — app appeared broken | Fixed — pulsing status dot injected into welcome state during `wakeBackend()`
+
+### Fixes Applied
+- **backend/app/main.py** — Added Vercel URL + `allow_origin_regex`, added `expose_headers`, `max_age=600`, extended `allow_methods` list, added catch-all `@app.options("/{rest_of_path:path}")` handler
+- **frontend/app.js** — Replaced `API_BASE` constant with `getApiBase()` function (checks both `localhost` + `127.0.0.1`), replaced `callAPI()` with full `console.log` tracing + 60s timeout, added `wakeBackend()` function with DOM status indicator
+- **frontend/style.css** — Added `.backend-status`, `.status-dot`, `.status-dot.online`, `@keyframes pulse-dot`
+- **API_DEBUG.md** — Created in project root to track all findings
+
+### Test Results (post-fix)
+| Test | Result |
+|---|---|
+| Render health (cold wake) | ✅ 200 OK (after ~60s) |
+| CORS preflight from Vercel | ✅ 200, `Access-Control-Allow-Origin: https://uk-legal-assistant-i1gbnjzig...vercel.app` |
+| Full query from Vercel origin | ⚠️ 502 — Render proxy timeout on heavy RAG query (separate issue, not CORS) |
+| Local backend | ℹ️ Not running (expected) |
+
+### Local Status: Fixed ✅ (API_BASE + getApiBase covers 127.0.0.1)
+### Deployed Status: CORS Fixed ✅ — Render query 502 is a separate performance issue
+
+### Known Remaining Issue
+- **[RENDER-01]** Full RAG query returns 502 from Render — likely Render's 30-second proxy timeout being exceeded by the pipeline initialisation + Groq call on first use. Solutions: (a) upgrade to Render paid plan for longer timeout, (b) reduce pipeline startup time, (c) pre-warm pipeline in a background task before accepting queries.
+
+---
 ## RAILWAY DEPLOYMENT FIX — 2026-05-06
 ### Agent: Senior Developer — Deployment Config
 
