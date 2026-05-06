@@ -1,4 +1,36 @@
 ---
+## RAILWAY DEPLOYMENT FIX — 2026-05-06
+### Agent: Senior Developer — Deployment Config
+
+### Root Cause
+Railway injected `$PORT` as an environment variable but the `startCommand` in `railway.toml` was:
+`"/bin/sh -c 'uvicorn ... --port $PORT'"` — the single quotes around the inner command prevented shell variable expansion, so uvicorn received the literal string `$PORT` instead of an integer, causing "not a valid integer".
+
+### Changes Made
+- **`entrypoint.sh`** (new file) — shell script that reads `$PORT` into `APP_PORT` with a fallback default of `8000`, then exec's uvicorn with `PYTHONPATH=/app` and module path `backend.app.main:app`. Using `${PORT:-8000}` ensures the fallback is safe if Railway doesn't set `PORT` before the container starts.
+- **`Dockerfile`** — complete rewrite: removed `ENV PORT`, `ENV PYTHONPATH=/app/backend`, and the bare `EXPOSE 8080`; replaced with `ENV PYTHONPATH=/app`, `ENV PYTHONUNBUFFERED=1`, copies and chmod's `entrypoint.sh`, and uses `ENTRYPOINT ["/bin/sh", "/app/entrypoint.sh"]`. No CMD line.
+- **`railway.toml`** — removed `startCommand` entirely. Railway now defers to the Dockerfile `ENTRYPOINT`. Kept `healthcheckPath`, `healthcheckTimeout`, `restartPolicyType`, `restartPolicyMaxRetries`.
+
+### Issues Found
+- [DEPLOY-01] `startCommand` in `railway.toml` used single quotes — `$PORT` was passed as a literal string, not an integer | Status: Fixed
+- [DEPLOY-02] `PYTHONPATH` was `/app/backend` — correct for `app.main` style imports but conflicts with `python -m uvicorn backend.app.main:app` module path | Status: Fixed (PYTHONPATH set to `/app`)
+- [DEPLOY-03] `EXPOSE 8080` in Dockerfile did not match the actual port uvicorn was binding | Status: Fixed (EXPOSE removed; port is fully runtime-determined via `$PORT`)
+
+### Issues Fixed This Phase
+- [DEPLOY-01] Fixed by removing `startCommand` and delegating entirely to `entrypoint.sh`
+- [DEPLOY-02] Fixed by setting `PYTHONPATH=/app` and using full module path `backend.app.main:app`
+- [DEPLOY-03] Fixed by removing the static `EXPOSE` — port is now dynamic
+
+### Known Limitations
+- `entrypoint.sh` uses `--workers 1` — safe for Railway's free tier; increase for paid plans if load demands it.
+- `data/index/` is baked into the Docker image at build time. If the index is rebuilt, a new deploy is needed to pick up the changes.
+
+### Next Phase Dependencies
+- Set `GROQ_API_KEY` in the Railway dashboard environment variables before deploying.
+- After deploy, update `API_BASE` in `frontend/app.js` to the Railway-assigned public URL.
+- Add that Railway URL to `allow_origins` in `backend/app/main.py` CORS middleware.
+
+---
 ## CONNECTION FIX — 2026-05-06
 ### Agent: Senior Developer — Connection Debug
 
