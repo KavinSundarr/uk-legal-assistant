@@ -1,0 +1,146 @@
+[
+  {
+    "id": "imm-01",
+    "category": "immigration",
+    "query": "How do I apply for a Skilled Worker visa and what are the requirements?",
+    "reference_answer": "To apply for a Skilled Worker visa you need a job offer from a UK employer with a valid sponsor licence. The role must meet the minimum salary threshold and be on the eligible occupations list. You must score 70 points: the job offer gives 20 points, speaking English gives 10 points, and salary gives up to 20 points. You apply online, pay the visa fee and healthcare surcharge, and provide biometric information."
+  },
+  {
+    "id": "imm-02",
+    "category": "immigration",
+    "query": "What is indefinite leave to remain and how do I qualify?",
+    "reference_answer": "Indefinite leave to remain (ILR) gives you the right to live and work in the UK permanently with no time limit. You generally need to have lived in the UK continuously for 5 years on a qualifying visa such as Skilled Worker. You must not have spent more than 180 days outside the UK in any 12-month period during those 5 years. You also need to pass the Life in the UK test and meet the English language requirement."
+  },
+  {
+    "id": "imm-03",
+    "category": "immigration",
+    "query": "How long can I stay in the UK on a Standard Visitor visa?",
+    "reference_answer": "On a Standard Visitor visa you can stay in the UK for up to 6 months. You cannot work, live in the UK permanently, or claim public funds. You can visit for tourism, visit family and friends, attend business meetings, or undertake a short course of study up to 6 months. You must leave by the date given on your visa or entry stamp."
+  },
+  {
+    "id": "stu-01",
+    "category": "student",
+    "query": "Can I work part-time on a Student visa and how many hours am I allowed?",
+    "reference_answer": "On a Student visa you can generally work part-time during term time. If you are studying at degree level or above you can work up to 20 hours per week during term time. During official vacation periods you can usually work full-time with no hour restriction. Students on below-degree courses may be limited to 10 hours per week. You cannot be self-employed or do certain restricted jobs. Always check the conditions on your visa as individual restrictions vary."
+  },
+  {
+    "id": "stu-02",
+    "category": "student",
+    "query": "What are the English language requirements for a Student visa?",
+    "reference_answer": "To get a Student visa you must prove you can read, write, speak and understand English. Most students need to take a Secure English Language Test (SELT) approved by UKVI. The level required depends on your course: degree level courses typically require B2 on the Common European Framework. Some students are exempt if they are from a majority English-speaking country or have a degree taught in English."
+  },
+  {
+    "id": "stu-03",
+    "category": "student",
+    "query": "How much money do I need to show for a Student visa application?",
+    "reference_answer": "You need to show you have enough money to pay your course fees for the first year and support yourself while you study. If you are studying in London you need to show 1334 pounds per month for up to 9 months. Outside London the amount is 1023 pounds per month for up to 9 months. You must have held this money in your bank account for at least 28 consecutive days before you apply."
+  },
+  {
+    "id": "drv-01",
+    "category": "driving",
+    "query": "How many penalty points do I need before I get a driving ban?",
+    "reference_answer": "You will normally be banned from driving if you accumulate 12 or more penalty points within 3 years. This is known as totting up. New drivers who passed their test within the last 2 years will have their licence revoked if they get 6 or more points. The court can also ban you for a single serious offence such as drink driving regardless of your points total. A ban under totting up is usually a minimum of 6 months."
+  },
+  {
+    "id": "drv-02",
+    "category": "driving",
+    "query": "What are the penalties for driving without insurance in the UK?",
+    "reference_answer": "Driving without insurance is a serious offence in the UK. If caught you face a fixed penalty of 300 pounds and 6 penalty points on your licence. If the case goes to court you can receive an unlimited fine and be disqualified from driving. The police can also seize and destroy your vehicle if you are caught driving without insurance. Third-party insurance is the minimum legal requirement for all vehicles on public roads."
+  },
+  {
+    "id": "drv-03",
+    "category": "driving",
+    "query": "What happens if I get caught speeding and how much are the fines?",
+    "reference_answer": "If you are caught speeding you can receive a Fixed Penalty Notice with a 100 pound fine and 3 penalty points. For more serious speeding offences the case goes to court where fines are based on your weekly income: Band A is up to 75 percent of weekly income for minor excess speed, Band B is 100 percent for moderate excess, and Band C is 150 percent for serious excess speed. You can also be disqualified if the offence is serious enough."
+  },
+  {
+    "id": "emp-01",
+    "category": "employment",
+    "query": "What is the minimum notice period my employer must give me if they want to terminate my contract?",
+    "reference_answer": "Your statutory minimum notice period depends on how long you have worked for your employer. For less than 1 month you have no statutory notice. For 1 month to 2 years you are entitled to 1 week notice. After that you get 1 additional week for each complete year of service up to a maximum of 12 weeks. For example if you have worked for 5 years you are entitled to 5 weeks notice. Your contract may give you a longer notice period than the statutory minimum."
+  },
+  {
+    "id": "emp-02",
+    "category": "employment",
+    "query": "What are my rights if my employer wants to make me redundant?",
+    "reference_answer": "If you are being made redundant your employer must follow a fair process. They must give you proper notice, consult with you, consider alternatives to redundancy, and use a fair selection process. You are entitled to statutory redundancy pay if you have worked for 2 or more years. The amount depends on your age, length of service, and weekly pay. Your employer must also give you reasonable time off to look for a new job. You can claim unfair dismissal if the process was not followed correctly."
+  },
+  {
+    "id": "emp-03",
+    "category": "employment",
+    "query": "What is the National Minimum Wage and National Living Wage in the UK?",
+    "reference_answer": "The National Living Wage applies to workers aged 21 and over. The National Minimum Wage applies to younger workers with lower rates for each age band. Workers aged 18 to 20 have their own rate and apprentices have a separate apprentice rate. Your employer must pay you at least the applicable rate for your age. If you are not being paid the correct minimum wage you can report your employer to HMRC."
+  },
+  {
+    "id": "hou-01",
+    "category": "housing",
+    "query": "What is a Section 21 notice and can my landlord evict me with one?",
+    "reference_answer": "A Section 21 notice is a no-fault eviction notice. Your landlord can use it to end an assured shorthold tenancy without needing to give a reason. They must give you at least 2 months written notice. Your landlord cannot serve a valid Section 21 notice if they have not protected your deposit in a government approved scheme, provided you with the deposit protection certificate, given you the How to Rent guide, or if the property has an improvement notice. After notice expires they must go to court to obtain a possession order."
+  },
+  {
+    "id": "hou-02",
+    "category": "housing",
+    "query": "How much deposit can my landlord legally ask for in England?",
+    "reference_answer": "In England your landlord can charge a maximum tenancy deposit of 5 weeks rent if your annual rent is under 50000 pounds, or 6 weeks rent if your annual rent is 50000 pounds or more. Your landlord must protect your deposit in a government approved tenancy deposit scheme within 30 days of receiving it. The three approved schemes are the Deposit Protection Service, MyDeposits, and the Tenancy Deposit Scheme. Failure to protect your deposit means your landlord cannot serve a valid Section 21 notice."
+  },
+  {
+    "id": "hou-03",
+    "category": "housing",
+    "query": "My landlord has not fixed a broken boiler for weeks. What are my rights?",
+    "reference_answer": "Your landlord is legally responsible for keeping the structure and exterior of your home in repair, and maintaining heating and hot water. You should report the repair in writing and keep a copy. If your landlord does not act within a reasonable time you can report them to your local council environmental health department. The council can issue an improvement notice requiring your landlord to carry out the work. In serious cases you may be able to withhold rent or carry out repairs yourself and deduct costs, but you should get legal advice before doing this."
+  },
+  {
+    "id": "hea-01",
+    "category": "healthcare",
+    "query": "Am I entitled to free NHS treatment as a foreign national living in the UK?",
+    "reference_answer": "To access free NHS hospital treatment you generally need to be ordinarily resident in the UK, meaning you live here lawfully on a settled basis. EU citizens, refugees, and those with indefinite leave to remain are usually entitled to free NHS treatment. Most overseas visitors and those on temporary visas must pay the NHS health surcharge as part of their visa application, which then entitles them to NHS treatment. Emergency treatment in A and E is free to everyone regardless of immigration status."
+  },
+  {
+    "id": "hea-02",
+    "category": "healthcare",
+    "query": "How do I make a formal complaint about NHS treatment?",
+    "reference_answer": "If you want to complain about NHS treatment you should first try to resolve the issue locally by speaking to the relevant department. For a formal complaint contact the Patient Advice and Liaison Service (PALS) at the hospital or GP practice. You can make a written complaint within 12 months of the incident. If you are not satisfied with the response you can escalate your complaint to the Parliamentary and Health Service Ombudsman. You can also seek advice from your local Healthwatch organisation."
+  },
+  {
+    "id": "hea-03",
+    "category": "healthcare",
+    "query": "What is the NHS health surcharge and how much is it?",
+    "reference_answer": "The NHS health surcharge is paid by most people applying for a UK visa for more than 6 months. It gives you access to NHS services during your stay. The standard rate is 1035 pounds per year for adults. Students and those on Youth Mobility Scheme visas pay a reduced rate of 776 pounds per year. Children under 18 pay 776 pounds per year. You pay the surcharge online when you apply for your visa and the amount covers the full duration of your visa."
+  },
+  {
+    "id": "ben-01",
+    "category": "benefits",
+    "query": "How do I claim Universal Credit for the first time?",
+    "reference_answer": "To claim Universal Credit you apply online at gov.uk. You will need your National Insurance number, details of your bank account, an email address, and information about your housing costs and income. After you apply you will have an initial appointment with a work coach at your local jobcentre. Your first payment is usually made 5 weeks after you apply. You may be able to get an advance payment to help with costs while you wait. Universal Credit is paid monthly directly into your bank account."
+  },
+  {
+    "id": "ben-02",
+    "category": "benefits",
+    "query": "Can I appeal a PIP decision if I disagree with it?",
+    "reference_answer": "If you disagree with a Personal Independence Payment decision you must first ask for a mandatory reconsideration. You need to do this within 1 month of the decision date. Contact DWP and explain why you think the decision is wrong. If you are still unhappy with the outcome of the mandatory reconsideration you can appeal to an independent tribunal. The tribunal is free and you can be represented. Most people who appeal PIP decisions to tribunal are successful, so it is worth appealing if you believe the decision is wrong."
+  },
+  {
+    "id": "ben-03",
+    "category": "benefits",
+    "query": "What is Statutory Sick Pay and am I entitled to it?",
+    "reference_answer": "Statutory Sick Pay is paid by your employer if you are too ill to work. To qualify you must be classed as an employee, have been ill for at least 4 consecutive days including non-working days, and earn at least the Lower Earnings Limit per week. SSP is paid at the current statutory rate for up to 28 weeks. You do not receive SSP for the first 3 days of illness, known as waiting days. If you are self-employed you are not entitled to SSP but may be able to claim other benefits such as Employment and Support Allowance."
+  },
+  {
+    "id": "cri-01",
+    "category": "criminal",
+    "query": "What are my legal rights if I am arrested by the police?",
+    "reference_answer": "When you are arrested by the police you have the right to know why you are being arrested, the right to remain silent and not answer questions, the right to speak to a solicitor in private before being questioned, and the right to have someone told that you have been arrested. You can get free legal advice from the duty solicitor at the police station. You should be given a written notice of your rights. The police can hold you for up to 24 hours without charging you in most cases, though this can be extended for serious offences."
+  },
+  {
+    "id": "cri-02",
+    "category": "criminal",
+    "query": "Do I have to answer police questions without a solicitor present?",
+    "reference_answer": "No, you do not have to answer police questions without a solicitor present. You have the right to free legal advice at any time during your detention at a police station. You can ask for the duty solicitor at any point. You are not obliged to answer questions during a police interview and you can say no comment to any questions. However, if you later rely on something in court that you could have mentioned in your interview, the court can draw adverse inferences from your earlier silence."
+  },
+  {
+    "id": "cri-03",
+    "category": "criminal",
+    "query": "What happens at a first hearing at the magistrates court?",
+    "reference_answer": "At your first hearing at the magistrates court the charge against you will be read out and you will be asked to enter a plea of guilty or not guilty. If you plead guilty the magistrates may sentence you immediately or adjourn for a pre-sentence report. If you plead not guilty a trial date will be set. The magistrates will also consider bail and decide whether to release you or remand you in custody. More serious offences may be sent to the Crown Court. It is strongly advisable to have a solicitor represent you at your first hearing."
+  }
+]

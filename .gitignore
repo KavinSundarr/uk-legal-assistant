@@ -1,0 +1,39 @@
+# Environment — never commit secrets
+.env
+
+# Data — raw scraped pages and processed text are not committed
+# (data/index/ IS committed — it contains the pre-built FAISS + BM25 artefacts)
+data/raw/
+data/processed/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Test cache
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Scratch / temp files
+frontend/New Text Document.txt

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free AI-powered UK legal information for immigration, driving, employment, housing, students and more. Powered by official government sources." />
+  <title>UK Legal Assistant — Free UK Legal Information</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════ FIXED NAVBAR ═══════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-brand">
+      <div class="navbar-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="2" x2="12" y2="20"/>
+          <line x1="2"  y1="6" x2="22" y2="6"/>
+          <path d="M3 6l2 6H1l2-6z M3 12c0 1.4 1 2.5 2 2.5s2-1.1 2-2.5H3z"/>
+          <path d="M19 6l2 6h-4l2-6z M17 12c0 1.4 1 2.5 2 2.5s2-1.1 2-2.5h-4z"/>
+          <line x1="8" y1="20" x2="16" y2="20"/>
+        </svg>
+      </div>
+      <div class="navbar-title">
+        <span class="navbar-name">UK Legal Assistant</span>
+        <span class="navbar-sub">Free legal information</span>
+      </div>
+    </div>
+    <div class="navbar-right">
+      <div class="navbar-badge" aria-label="This service provides information only, not legal advice">
+        ⓘ Information only — not legal advice
+      </div>
+      <button type="button" class="hamburger-btn" id="hamburgerBtn"
+              aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════ APP LAYOUT ═══════════════ -->
+  <div class="app-layout">
+
+    <!-- ── LEFT SIDEBAR ────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar" aria-label="Legal categories and navigation">
+
+      <button type="button" class="new-chat-btn" id="newChatBtn"
+              aria-label="Start a new chat">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="8" y1="1" x2="8" y2="15"/>
+          <line x1="1" y1="8" x2="15" y2="8"/>
+        </svg>
+        New Chat
+      </button>
+
+      <!-- Legal categories -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Legal Areas</div>
+        <nav class="category-nav" aria-label="Legal categories">
+          <button type="button" class="cat-item" data-category="immigration" aria-pressed="false">
+            <span class="cat-icon" aria-hidden="true">🛂</span>
+            <span class="cat-label">Immigration</span>
+          </button>
+          <button type="button" class="cat-item" data-category="driving" aria-pressed="false">
+            <span class="cat-icon" aria-hidden="true">🚗</span>
+            <span class="cat-label">Driving</span>
+          </button>
+          <button type="button" class="cat-item" data-category="employment" aria-pressed="false">
+            <span class="cat-icon" aria-hidden="true">💼</span>
+            <span class="cat-label">Employment</span>
+          </button>
+          <button type="button" class="cat-item" data-category="housing" aria-pressed="false">
+            <span class="cat-icon" aria-hidden="true">🏠</span>
+            <span class="cat-label">Housing</span>
+          </button>
+          <button type="button" class="cat-item" data-category="student" aria-pressed="false">
+            <span class="cat-icon" aria-hidden="true">🎓</span>
+            <span class="cat-label">Students</span>
+          </button>
+          <button type="button" class="cat-item" data-category="healthcare" aria-pressed="false">
+            <span class="cat-icon" aria-hidden="true">🏥</span>
+            <span class="cat-label">Healthcare</span>
+          </button>
+          <button type="button" class="cat-item" data-category="benefits" aria-pressed="false">
+            <span class="cat-icon" aria-hidden="true">💰</span>
+            <span class="cat-label">Benefits</span>
+          </button>
+          <button type="button" class="cat-item" data-category="criminal" aria-pressed="false">
+            <span class="cat-icon" aria-hidden="true">🚔</span>
+            <span class="cat-label">Criminal</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Chat history -->
+      <div class="sidebar-section sidebar-history">
+        <div class="sidebar-section-title">Recent Chats</div>
+        <div class="history-list" id="historyList">
+          <div class="history-empty">No previous chats yet</div>
+        </div>
+      </div>
+
+      <!-- Sidebar footer links -->
+      <div class="sidebar-footer">
+        <a href="https://www.gov.uk" target="_blank" rel="noopener noreferrer">Gov.uk</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer">Citizens Advice</a>
+      </div>
+
+    </aside>
+
+    <!-- ── MAIN CHAT AREA ───────────────────────────────── -->
+    <main class="chat-area" aria-label="Legal assistant chat">
+
+      <!-- Thin header bar showing active category -->
+      <div class="chat-header" id="chatHeader">
+        <div class="chat-header-left">
+          <span class="chat-category-label" id="chatCategoryLabel">
+            Ask anything about UK law
+          </span>
+        </div>
+        <button type="button" class="clear-category-btn" id="clearCategoryBtn"
+                aria-label="Clear category filter">
+          ✕ Clear filter
+        </button>
+      </div>
+
+      <!-- Messages -->
+      <div class="messages" id="messages"
+           role="log" aria-live="polite" aria-label="Conversation">
+
+        <!-- Welcome state — hidden after first message -->
+        <div class="welcome-state" id="welcomeState">
+          <div class="welcome-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none"
+                 stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="2" x2="12" y2="20"/>
+              <line x1="2"  y1="6" x2="22" y2="6"/>
+              <path d="M3 6l2 6H1l2-6z M3 12c0 1.4 1 2.5 2 2.5s2-1.1 2-2.5H3z"/>
+              <path d="M19 6l2 6h-4l2-6z M17 12c0 1.4 1 2.5 2 2.5s2-1.1 2-2.5h-4z"/>
+              <line x1="8" y1="20" x2="16" y2="20"/>
+            </svg>
+          </div>
+          <h1 class="welcome-title">How can I help you today?</h1>
+          <p class="welcome-sub">
+            I search official UK government and Citizens Advice sources to answer
+            your legal questions in plain English.
+          </p>
+          <div class="welcome-chips" role="list" aria-label="Example questions">
+            <button type="button" class="chip" role="listitem"
+                    data-q="Can I work part time on a student visa?">
+              Student visa work rights
+            </button>
+            <button type="button" class="chip" role="listitem"
+                    data-q="What are my rights if my landlord won't fix the heating?">
+              Landlord repair rights
+            </button>
+            <button type="button" class="chip" role="listitem"
+                    data-q="I got 6 penalty points on my licence, what happens now?">
+              Penalty points
+            </button>
+            <button type="button" class="chip" role="listitem"
+                    data-q="How do I claim Universal Credit?">
+              Universal Credit
+            </button>
+            <button type="button" class="chip" role="listitem"
+                    data-q="What are my redundancy rights?">
+              Redundancy rights
+            </button>
+            <button type="button" class="chip" role="listitem"
+                    data-q="Am I entitled to free NHS treatment as an international student?">
+              NHS as a student
+            </button>
+          </div>
+        </div>
+
+      </div><!-- end .messages -->
+
+      <!-- Sticky input area -->
+      <div class="input-area">
+        <div class="input-card">
+          <textarea
+            id="queryInput"
+            class="input-field"
+            placeholder="Ask a UK legal question..."
+            rows="1"
+            maxlength="1000"
+            aria-label="Your legal question"
+            aria-describedby="charCounter"
+          ></textarea>
+          <div class="input-footer">
+            <span class="char-counter" id="charCounter" aria-live="polite">0 / 1000</span>
+            <button type="submit" class="send-btn" id="sendBtn"
+                    disabled aria-label="Send question">
+              Send
+              <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"
+                   aria-hidden="true">
+                <path d="M1 8l14-7-7 14V9H1z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- end .app-layout -->
+
+  <!-- Mobile sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-brand">UK Legal Assistant</div>
+        <p class="footer-desc">Free AI-powered legal information for everyone in the UK.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Official Sources</div>
+        <a href="https://www.gov.uk" target="_blank" rel="noopener noreferrer">Gov.uk</a>
+        <a href="https://www.citizensadvice.org.uk" target="_blank" rel="noopener noreferrer">Citizens Advice</a>
+        <a href="https://www.acas.org.uk" target="_blank" rel="noopener noreferrer">ACAS</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Built With</div>
+        <p>Llama 3.1 8B via Groq</p>
+        <p>BGE + FAISS + BM25</p>
+        <p>82.6% faithfulness score</p>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      For general information only. Not legal advice.
+      Laws change — always verify with official sources.
+      Consult a qualified solicitor for personal legal advice.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
