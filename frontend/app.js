@@ -7,7 +7,7 @@
 /* ── API base URL ───────────────────────────────────────────────────────── */
 const API_BASE = window.location.hostname === 'localhost'
   ? 'http://127.0.0.1:8000'
-  : 'https://YOUR-RAILWAY-URL.railway.app';
+  : 'https://uk-legal-assistant.onrender.com';
 
 /* ── Application state ──────────────────────────────────────────────────── */
 const state = {
